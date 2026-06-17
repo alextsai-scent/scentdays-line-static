@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scentdays よくあるご質問 (Q&A)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #f6f1e8 0%, #ede4d3 100%);
+    color: #3a342d;
+    line-height: 1.75;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100vh;
+}
+.header {
+    background: linear-gradient(135deg, #c9b496 0%, #b89a78 100%);
+    color: #fff;
+    padding: 40px 24px 32px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+.header .sub {
+    font-size: 13px;
+    opacity: 0.92;
+    letter-spacing: 0.06em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 24px 16px 80px; }
+.intro {
+    text-align: center;
+    font-size: 13px;
+    color: #7a6f60;
+    margin-bottom: 24px;
+    padding: 0 16px;
+    line-height: 1.8;
+}
+.faq-item {
+    margin-bottom: 12px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(120,90,60,0.08);
+    transition: box-shadow 0.2s;
+}
+.faq-item.open {
+    box-shadow: 0 4px 20px rgba(120,90,60,0.14);
+}
+.faq-question {
+    padding: 18px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #3a342d;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+    user-select: none;
+}
+.faq-question:active { background: #faf5ec; }
+.faq-question::after {
+    content: '+';
+    font-size: 24px;
+    color: #b89a78;
+    font-weight: 300;
+    transition: transform 0.25s;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.faq-item.open .faq-question::after {
+    transform: rotate(45deg);
+}
+.faq-q-num {
+    font-family: 'Noto Serif JP', serif;
+    color: #b89a78;
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 2px;
+    letter-spacing: 0.05em;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: linear-gradient(180deg, #faf6ee 0%, #f6f0e2 100%);
+}
+.faq-item.open .faq-answer { max-height: 4000px; }
+.faq-answer-inner { padding: 16px 22px 22px; }
+.faq-answer p {
+    font-size: 14px;
+    color: #5a5247;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.85;
+}
+.faq-answer a {
+    color: #b8915a;
+    text-decoration: underline;
+    word-break: break-all;
+}
+
+/* YouTube Shorts gallery */
+.shorts-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #e6dcc8;
+}
+.shorts-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 12px;
+    color: #8c7252;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+.shorts-grid {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+}
+.shorts-grid::-webkit-scrollbar { height: 4px; }
+.shorts-grid::-webkit-scrollbar-thumb { background: #d4c4a8; border-radius:2px; }
+.short-card {
+    flex: 0 0 140px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 6px rgba(120,90,60,0.1);
+    transition: transform 0.15s;
+}
+.short-card:active { transform: scale(0.97); }
+.short-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9/16;
+    background: #d4c4a8 center/cover no-repeat;
+    background-size: cover;
+}
+.short-thumb::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.18);
+}
+.short-thumb::after {
+    content: '▶';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b89a78;
+    font-size: 12px;
+    padding-left: 3px;
+}
+.short-label {
+    padding: 8px 10px 10px;
+    font-size: 11px;
+    color: #3a342d;
+    line-height: 1.45;
+    font-weight: 500;
+}
+.footer {
+    text-align: center;
+    color: #998771;
+    font-size: 12px;
+    padding: 32px 16px;
+    letter-spacing: 0.05em;
+}
+.footer .brand {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    color: #8c7252;
+    margin-bottom: 8px;
+    letter-spacing: 0.2em;
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>よくあるご質問</h1>
+    <div class="sub">Frequently Asked Questions</div>
+</div>
+<div class="container">
+<div class="intro">お客さまから多くお寄せいただく10のご質問をまとめました。<br>気になる項目をタップして、ご確認ください。</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q01</span>　Scent Gem はいくらですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>Scent Gem の一般販売価格は ¥129,800（税込）ですが、
+現在開催中のクラウドファンディングでは
+45% OFF の ¥72,800（税込）にてお迎えいただけます。
+
+さらに、香りカートリッジ12本と、
+月額980円スタンダードプラン（香りの定期便）の
+初月無料体験をプランに含んでおります。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/NoCBn4Mm6yo" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/NoCBn4Mm6yo/hqdefault.jpg');"></div>
+          <div class="short-label">月額0円ライトプラン登場</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/A_J_nQrYqE0" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/A_J_nQrYqE0/hqdefault.jpg');"></div>
+          <div class="short-label">2台セット14万5千円の中身</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/8zoHDGr89kk" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/8zoHDGr89kk/hqdefault.jpg');"></div>
+          <div class="short-label">実質本体価格と分割払い</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q02</span>　サブスクは必須ですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>月額プランへのお申し込みは必須ではございません。
+
+月額980円のスタンダードプランに加え、
+皆さまからのご要望にお応えして、
+新たに月額0円のライトプランをご用意いたしました。
+
+ご自身のスタイルに合わせて
+無理なくお楽しみいただけます。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/NoCBn4Mm6yo" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/NoCBn4Mm6yo/hqdefault.jpg');"></div>
+          <div class="short-label">月額0円ライトプラン登場</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/JO13RZ92XTg" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/JO13RZ92XTg/hqdefault.jpg');"></div>
+          <div class="short-label">サブスク1つで何台でも使える</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/_wa567Xl15U" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/_wa567Xl15U/hqdefault.jpg');"></div>
+          <div class="short-label">嗅ぎ放題とPPV課金の違い</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q03</span>　クラウドファンディングとは何ですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>クラウドファンディングは、
+新しい製品を一緒に育てていただける
+&quot;先行支援&quot; の仕組みです。
+
+Scent Gem は GreenFunding にて
+5月29日に開始しました。
+
+皆さまからのご支援によって、
+特別価格でいち早くお迎えいただけるほか、</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/o6b_UJNJO-w" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/o6b_UJNJO-w/hqdefault.jpg');"></div>
+          <div class="short-label">クラファン45%オフの中身</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q04</span>　香りの種類はいくつありますか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>Scent Gem では、
+専属の調香師が一つひとつ丁寧にデザインした
+多彩な香りをご用意しております。
+
+季節やシーンに合わせて、
+12本のカートリッジをアプリからの簡単な指先操作で、
+お好きな配分で掛け合わせて、
+100万通り以上の香りをお楽しみいただけます。
+
+お客さまの好みにぴったりの香りが、
+きっと見つかります。
+
+また、月額980円スタンダードプランに
+ご加入のお客さまは、
+アイドルや芸能人とのコラボレーション、
+占いをテーマにした香り、
+専属の調香師が手がけた香りのデータが
+毎月続々と配信されます。
+
+期間中はダウンロードし放題・嗅ぎ放題で、
+余すところなくお楽しみいただけます。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/kOSyM_F3dPs" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/kOSyM_F3dPs/hqdefault.jpg');"></div>
+          <div class="short-label">アプリで自分だけの香りを作る</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/ElLbN69Dr0k" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/ElLbN69Dr0k/hqdefault.jpg');"></div>
+          <div class="short-label">12原色の掛け合わせで100万通り</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/iEgJE-TudTA" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/iEgJE-TudTA/hqdefault.jpg');"></div>
+          <div class="short-label">海外アイドル監修の香りも届く</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q05</span>　スマホアプリは必要ですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>はい、必要です。
+
+Scent Gem は、専用アプリと連携することで、
+お好きな香り・強度・タイミングを
+指先で自在にお調整いただける設計です。
+
+詳しい使い方は、
+関連するYouTubeのShort動画にて
+ご紹介しております。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/kOSyM_F3dPs" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/kOSyM_F3dPs/hqdefault.jpg');"></div>
+          <div class="short-label">アプリで自分だけの香りを作る</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/gvkKTSfx2KQ" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/gvkKTSfx2KQ/hqdefault.jpg');"></div>
+          <div class="short-label">1台のスマホで複数台コントロール</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q06</span>　カートリッジはどのくらい持ちますか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>香りカートリッジ1本あたりの目安は、
+1日4時間の標準的なご使用で約3ヶ月です。
+
+Scent Gem は12本のカートリッジを
+掛け合わせてお楽しみいただける設計のため、
+満遍なくお使いいただいた場合は
+合計で約36ヶ月お楽しみいただけます。
+
+よくお使いになる香りは
+お早めになくなる場合もございますが、
+1本単位でアプリから簡単にご購入いただけます。
+
+残量が少なくなりますと
+アプリへお知らせが届きますので、
+安心してお使いいただけます。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/bXWyxzsjPPM" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/bXWyxzsjPPM/hqdefault.jpg');"></div>
+          <div class="short-label">カートリッジは何ヶ月持つ？</div>
+        </a>
+        <a class="short-card" href="https://www.youtube.com/shorts/kJKKGoxCAVw" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/kJKKGoxCAVw/hqdefault.jpg');"></div>
+          <div class="short-label">丸ごと交換6,980円・詰め替え3,480円</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q07</span>　本体のサイズと拡散範囲は？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>Scent Gem 本体のサイズは、
+幅 18.5cm × 高さ 18cm です。
+
+拡散範囲は最大 100㎡ まで対応しており、
+リビングやワークスペースなど
+広めのお部屋でも、
+香りをお楽しみいただけます。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/cJRhrArarq8" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/cJRhrArarq8/hqdefault.jpg');"></div>
+          <div class="short-label">ディフューザーのサイズと拡散範囲</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q08</span>　タイマー機能はありますか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>はい、ご用意しております。
+
+時刻を分単位で設定できる、
+アラームのような精密なタイマー機能を搭載しております。
+
+朝・昼・夜など、シーンに合わせて
+自動で香りを切り替える設定も可能です。
+
+詳しい使い方は、
+関連するYouTubeのShort動画にて
+ご紹介しております。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/jeHm_dFAN94" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/jeHm_dFAN94/hqdefault.jpg');"></div>
+          <div class="short-label">曜日・時間で細かく設定できるタイマー</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q09</span>　ペットを飼っていても大丈夫ですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>Scent Gem は、
+人にとって心地よい香りをお楽しみいただくために
+開発・設計された製品でございます。
+
+犬や猫などのご家族への影響につきましては、
+香りの種類・お使いの環境・体質などによって
+感じ方が異なりますため、
+最初は短時間からお試しいただくことを
+おすすめいたします。
+
+ご不安がある場合は、
+かかりつけの獣医師さまへ
+ご相談いただけますと幸いです。</p>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q10</span>　天然香料と合成香料の違いは？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>Scent Gem では、
+天然香料12種類のカートリッジセットと、
+合成香料12種類のカートリッジセットを
+ご用意しております。
+
+ご購入時に、お好みのセットを
+お選びいただけます。
+
+【天然香料】
+植物や動物などの自然素材から抽出した香料です。
+やわらかく繊細に香り立ち、
+心身を整える効能も期待される、
+自然そのものの豊かさを感じていただけます。
+
+【合成香料】
+調香師が一からデザインした香料で、
+華やかで印象的な香りを生み出します。
+
+ブランドの香水のほとんどは
+合成香料を用いて作られており、
+時間が経っても変わらぬ香り立ちと、
+記憶に残る存在感が魅力です。
+
+トレンドの香りや、
+自然素材だけでは表現しきれない
+個性的な香りもお楽しみいただけます。
+
+どちらにもそれぞれの魅力がございますので、
+お客さまのお好み・暮らしのスタイルに合わせて
+お選びくださいませ。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/b00AOha3DSs" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/b00AOha3DSs/hqdefault.jpg');"></div>
+          <div class="short-label">天然香料の特徴</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q11</span>　AIオーラとは何ですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>AIオーラ（Scentdays AURA）は、
+お客さまの生活データを統合的に解析し、
+その瞬間にふさわしい香りを自動で選び届ける、
+Scentdays 独自のAIエージェントです。
+
+カレンダー情報や、
+スマートウォッチなどから取得する健康データ、
+室内の環境センサー情報をリアルタイムに読み取り、
+お仕事中・ご休息中・ご就寝前など、
+そのシーンに最適な香りを
+空間にやさしく届けます。
+
+ご自身で香りを選ばずとも、
+日々の暮らしに自然と寄り添う香りが
+巡る設計です。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/se6Jf7ShxmU" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/se6Jf7ShxmU/hqdefault.jpg');"></div>
+          <div class="short-label">AIオーラが最適な香りを自動で</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="faq-item">
+  <div class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span><span class="faq-q-num">Q12</span>　クリエイターモードとは何ですか？</span></div>
+  <div class="faq-answer"><div class="faq-answer-inner">
+    <p>クリエイターモードは、
+ご自身でデザインされた香りを
+Scentdays 上で販売いただける機能です。
+
+販売をご利用いただけるのは、
+月額プランにご加入中のお客さまが対象となります。
+
+詳しい使い方やマネタイズの仕組みは、
+関連するYouTubeのShort動画にて
+ご紹介しております。</p>
+    <div class="shorts-section">
+      <div class="shorts-label">▶ 関連動画（タップで再生）</div>
+      <div class="shorts-grid">
+        <a class="short-card" href="https://www.youtube.com/shorts/r-b1x5Ah69k" target="_blank" rel="noopener">
+          <div class="short-thumb" style="background-image:url('https://img.youtube.com/vi/r-b1x5Ah69k/hqdefault.jpg');"></div>
+          <div class="short-label">作った香りを売れる調香師機能</div>
+        </a>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="footer">
+    <div class="brand">Scentdays</div>
+    <div>香りで彩る、新しい毎日。</div>
+</div>
+</body>
+</html>
