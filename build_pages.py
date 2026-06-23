@@ -440,6 +440,8 @@ body {
 <div class="gallery">
 """
 wallpaper_labels = {
+    'Ajisai_002.png': '初夏 ・ 紫陽花',
+    'Ajisai_004.png': '初夏 ・ 紫陽花の小径',
     'Island_Heart_6_7_002B.png': '夏 ・ 想いの島',
     'Windsurfing_6_7_003B.png': '夏 ・ 風と海',
     'Sunset_6_7_004B.png': '夏 ・ 夕暮れの海',
