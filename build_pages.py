@@ -289,7 +289,10 @@ with open(os.path.join(BASE, 'qa.html'), 'w') as f:
 print(f'✓ qa.html: {len(ordered)} FAQs')
 
 # Wallpapers page (unchanged from previous)
-wp_files = sorted(os.listdir(os.path.join(BASE, 'wallpapers')))
+_wpdir = os.path.join(BASE, 'wallpapers')
+wp_files = [f for f in os.listdir(_wpdir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+# 新しく追加したものが上（追加＝ファイル更新日時の降順＝投稿順で新しい順）
+wp_files.sort(key=lambda f: os.path.getmtime(os.path.join(_wpdir, f)), reverse=True)
 wp_html = """<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -440,6 +443,11 @@ body {
 <div class="gallery">
 """
 wallpaper_labels = {
+    'Sunflower_8_9_001A.png': '夏 ・ 向日葵',
+    'MorningGlory_8_9_001A.png': '夏 ・ 朝顔',
+    'Lotus_8_9_001C.png': '夏 ・ 蓮の花',
+    'Kinmokusei_001.png': '秋 ・ 金木犀',
+    'Susuki_with_Tsuki_001.png': '秋 ・ ススキと月',
     'Ajisai_002.png': '初夏 ・ 紫陽花',
     'Ajisai_004.png': '初夏 ・ 紫陽花の小径',
     'Island_Heart_6_7_002B.png': '夏 ・ 想いの島',
