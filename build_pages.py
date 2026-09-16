@@ -1,7 +1,25 @@
 #!/usr/bin/env python3
-"""Build qa.html (curated TOP 10 with YouTube Shorts) and wallpapers.html"""
-import yaml, json, os, glob, re
+"""Build qa.html (curated TOP 10 with YouTube Shorts) and wallpapers.html
+
+🔴 2026-09-16 安全弁を入れた（Claire）
+既定では **wallpapers.html と index.html だけ**を書き出す。qa.html を書き出すには
+`--qa` を明示的に付ける。
+
+理由＝**このスクリプトの Q&A の生成元（../faq/*.yml）が、公開中の qa.html より
+2版古い**。公開中の qa.html は 2026-08 のコミット 0824a0a「クラファン終了版へ更新」
+で **直接編集**されており、yml 側はクラウドファンディング期のまま。
+そのまま実行すると qa.html が
+  ・「45% OFF の ¥72,800」（景表法で外したはずの有利誤認表記）
+  ・終了したクラファン前提の本文と関連動画2本
+に**黙って巻き戻る**。壁紙を1枚足すだけのつもりで、公開中のQ&Aが巻き戻る状態だった。
+
+→ yml を公開中の本文に合わせて直すまでは `--qa` を付けない。直したときは
+   `diff <(git show origin/main:qa.html) qa.html` が空になることを必ず確認する。
+"""
+import yaml, json, os, glob, re, sys
 from html import escape
+
+WRITE_QA = '--qa' in sys.argv
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 FAQ_DIR = os.path.join(os.path.dirname(BASE), 'faq')
@@ -284,9 +302,14 @@ qa_html += """</div>
 </html>
 """
 
-with open(os.path.join(BASE, 'qa.html'), 'w') as f:
-    f.write(qa_html)
-print(f'✓ qa.html: {len(ordered)} FAQs')
+if WRITE_QA:
+    with open(os.path.join(BASE, 'qa.html'), 'w') as f:
+        f.write(qa_html)
+    print(f'✓ qa.html: {len(ordered)} FAQs')
+else:
+    print('⏭  qa.html はスキップ（既定）。生成元の ../faq/*.yml が公開中の本文より古く、')
+    print('   実行すると「45% OFF ¥72,800」のクラファン版へ巻き戻るため。')
+    print('   yml を公開中の本文に合わせたうえで `--qa` を付けて実行すること。')
 
 # Wallpapers page (unchanged from previous)
 _wpdir = os.path.join(BASE, 'wallpapers')
@@ -443,6 +466,9 @@ body {
 <div class="gallery">
 """
 wallpaper_labels = {
+    '10_October_001.png': '秋 ・ 無花果',
+    '11_November_002.png': '秋 ・ ダリア',
+    '12_December_001.png': '冬 ・ クリスマス',
     'Sunflower_8_9_001A.png': '夏 ・ 向日葵',
     'MorningGlory_8_9_001A.png': '夏 ・ 朝顔',
     'Lotus_8_9_001C.png': '夏 ・ 蓮の花',
